@@ -10,10 +10,12 @@
 #define echo 7     // Arduino Pin an HC-SR04 Echo
 #define trigger_2 8
 #define echo_2 9
-#define trigger_3 A2
-#define echo_3 A1
+#define trigger_3 A1
+#define echo_3 A2
+#define trigger_4 A3
+#define echo_4 A4
 
-long distance, duration, sonar1, sonar2, sonar3;
+long distance, duration, sonar1, sonar2, sonar3, sonar4;
 
 SdReader card;    // This object holds the information for the card
 FatVolume vol;    // This holds the information for the partition on the card
@@ -64,7 +66,8 @@ void setup() {
   pinMode(echo_2, INPUT);
   pinMode(echo_3, INPUT);
   pinMode(trigger_3, OUTPUT);
-
+  pinMode(echo_4, INPUT);
+  pinMode(trigger_4, OUTPUT);
    
   // set up serial port
   Serial.begin(9600);
@@ -161,17 +164,17 @@ void loop() {
   Serial.print(sonar3);
   Serial.println("cm");
 
-  /*SonarSensor(trigger_4, echo_4);
+  SonarSensor(trigger_4, echo_4);
   sonar4 = distance;
 
   Serial.print("distance of Sonar 4: ");
   Serial.print(sonar4);
-  Serial.println("cm");*/
+  Serial.println("cm");
   
   int randomNumber;
 
 // playing if distances are more than 1Meter  
-  if (sonar1 < 48 || sonar2 < 48 || sonar3 < 48)   {
+  if (sonar1 < 48 || sonar2 < 48 || sonar3 < 48 || sonar4 < 48)   {
     Serial.println("detected!");
     randomNumber = random(0,12);    
     playcomplete(wavFiles[randomNumber]); 
